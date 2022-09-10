@@ -33,6 +33,7 @@ export default function Main(){
     })
     // Initial UI variables
     const [ selected, setSelected ] = useState("hair");
+    const [ disable, setDisable ] = useState(false);
     const [ image, setImage ] = useState(null);
 
     useEffect(() => {
@@ -60,16 +61,20 @@ export default function Main(){
     };
 
     const download = (_event) => {
+        setDisable(true);
         const tag = document.getElementById('download');
         tag.click();
+        setDisable(false);
     };
 
     const randomize = (_event) => {
+        setDisable(true);
         let randomizedAlpaca = alpaca;
         Object.keys(alpaca).forEach(function(key) {
             randomizedAlpaca[key] = sample(AlpacaConfig[key].styles.map((style) => style.value))
         });
         setAlpaca({...randomizedAlpaca})
+        setDisable(false);
     };
 
     return (
@@ -105,11 +110,13 @@ export default function Main(){
                                             title="Randomize" 
                                             name="randomize"
                                             action={randomize}
+                                            disable={disable}
                                             />
                                             <IconButton 
                                             title="Download" 
                                             name="download"
                                             action={download}
+                                            disable={disable}
                                             />
                                             <a id="download" download="alpaca.png" href={image} style={{ display: 'none' }}>Download</a>
                                         </Stack>

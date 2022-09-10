@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import DownloadIcon from '@mui/icons-material/Download';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 
-export default function IconButton({title, name, action}){
+export default function IconButton({title, name, action, disable}){
     const icons = {
         download: {
             icon: <DownloadIcon/>,
@@ -22,6 +22,7 @@ export default function IconButton({title, name, action}){
         variant="contained"
         color={icons[name].color}
         sx={{ width: '100%', py: 1 }}
+        disabled={disable}
         >
             {title}
         </Button>
